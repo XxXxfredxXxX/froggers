@@ -2,7 +2,7 @@ package GameObjects;
 
 /**
  *
- * @author 
+ * @author timo,fridtjof
  */
 public class Look {
     private String picturePath;
