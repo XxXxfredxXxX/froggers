@@ -2,6 +2,7 @@ package GameCtr;
 
 import GameObjects.Car;
 import GameObjects.Frog;
+import Map.Map;
 
 /**
  *
@@ -13,29 +14,42 @@ public class GameCtr implements GameCtrInterface {
     private Frog frog;
     private int level;
     private int updateSpeed;
+    private Map map;
     
-    private void setLevel(int level){
-        
+    public void setMap(Map map){
+        this.map = map;
     }
     
-    private void updateCarPositions(){
-        
+    private void setLevel(int level){
+        this.level = level;
+    }
+    
+    private void updateCarPositions(int[][] newPositions){
+        this.map.setCarPosition(newPositions);
     }
     
     private void keyUp(){
-        
+        int[] currentPosition = this.map.getFrogPosition();
+        currentPosition[1] -= this.frog.getStepsize();
+        this.map.setFrogPosition(currentPosition);
     }
 
     private void keyLeft(){
-        
+        int[] currentPosition = this.map.getFrogPosition();
+        currentPosition[0] -= this.frog.getStepsize();
+        this.map.setFrogPosition(currentPosition);
     }
     
     private void keyRight(){
-        
+        int[] currentPosition = this.map.getFrogPosition();
+        currentPosition[0] += this.frog.getStepsize();
+        this.map.setFrogPosition(currentPosition);
     }
     
     private void keyDown(){
-        
+        int[] currentPosition = this.map.getFrogPosition();
+        currentPosition[1] += this.frog.getStepsize();
+        this.map.setFrogPosition(currentPosition);
     }
     
     private int isCollided(){
@@ -44,12 +58,12 @@ public class GameCtr implements GameCtrInterface {
     
     @Override
     public void setFrog(Frog frog) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.frog = frog;
     }
 
     @Override
     public void setCars(Car[] cars) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.cars = cars;
     }
 
     @Override
@@ -59,12 +73,13 @@ public class GameCtr implements GameCtrInterface {
 
     @Override
     public int getLevel() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.level;
     }
 
     @Override
     public int levelUp() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.level += 1;
+        return this.level;
     }
 
     @Override
@@ -74,7 +89,7 @@ public class GameCtr implements GameCtrInterface {
 
     @Override
     public int getUpdateSpeed() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.updateSpeed;
     }
     
 }
