@@ -5,9 +5,9 @@ package GameObjects;
  * @author fridtjof
  */
 public class Car extends Look{
-    private final int speed = 0;
+    private final int speed = 100;
     private int direction;
-    public final int stepsize = 0;
+    public final int stepsize = 5;
 
     public int getSpeed() {
         return this.speed;

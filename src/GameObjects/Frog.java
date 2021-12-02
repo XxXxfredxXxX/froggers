@@ -6,7 +6,7 @@ package GameObjects;
  */
 public class Frog {
     private Boolean life = true;
-    public final int stepsize = 0;
+    public final int stepsize = 10;
     
     public void die(){
         this.life = false;
