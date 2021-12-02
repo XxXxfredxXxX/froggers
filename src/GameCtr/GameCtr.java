@@ -1,12 +1,13 @@
 package GameCtr;
 
+import Direction.Direction;
 import GameObjects.Car;
 import GameObjects.Frog;
 import Map.Map;
 
 /**
  *
- * @author 
+ * @author fridtjof
  */
 public class GameCtr implements GameCtrInterface {
     
@@ -24,8 +25,27 @@ public class GameCtr implements GameCtrInterface {
         this.level = level;
     }
     
-    private void updateCarPositions(int[][] newPositions){
-        this.map.setCarPosition(newPositions);
+    
+    
+    private int getNewCarPosition(Car car){
+        int positionShift = 0;
+        if(car.getDirection() == Direction.LEFT){
+            return positionShift -= car.getStepsize();
+        }else{
+            return positionShift += car.getDirection();
+        }
+    }
+    
+    private void setNewCarPosition(int carIndex){
+        Car currentCar = this.cars[carIndex];
+        int[][] currentCarPosition = this.map.getCarPositions();
+        currentCarPosition[carIndex][0] += this.getNewCarPosition(currentCar);
+    }
+    
+    private void updateCarPositions(){
+        for(int x = 0;x <= this.map.getCarPositions().length;x++){
+            this.setNewCarPosition(x);
+        }
     }
     
     private void keyUp(){
