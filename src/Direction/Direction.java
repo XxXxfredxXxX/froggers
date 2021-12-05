@@ -1,3 +1,5 @@
+package Direction;
+
 /**
  *
  * @author fridtjof

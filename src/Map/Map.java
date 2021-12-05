@@ -20,12 +20,12 @@ public class Map implements MapInterface{
     }
 
     @Override
-    public int getFrogPosition() {
+    public int[] getFrogPosition() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public int getCarPositions() {
+    public int[][] getCarPositions() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
