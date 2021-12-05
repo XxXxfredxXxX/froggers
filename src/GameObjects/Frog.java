@@ -2,18 +2,18 @@ package GameObjects;
 
 /**
  *
- * @author 
+ * @author fridtjof
  */
 public class Frog {
     private Boolean life = true;
-    public final int stepsize = 0;
+    public final int stepsize = 10;
     
     public void die(){
-        
+        this.life = false;
     }
     
     public Boolean isDead(){
-        return false;
+        return this.life;
     }
     
     public int getStepsize(){
