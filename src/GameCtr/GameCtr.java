@@ -1,11 +1,13 @@
 package GameCtr;
 
+import Direction.Direction;
 import GameObjects.Car;
 import GameObjects.Frog;
+import Map.Map;
 
 /**
  *
- * @author 
+ * @author fridtjof
  */
 public class GameCtr implements GameCtrInterface {
     
@@ -13,29 +15,61 @@ public class GameCtr implements GameCtrInterface {
     private Frog frog;
     private int level;
     private int updateSpeed;
+    private Map map;
+    
+    public void setMap(Map map){
+        this.map = map;
+    }
     
     private void setLevel(int level){
-        
+        this.level = level;
+    }
+    
+    
+    
+    private int getNewCarPosition(Car car){
+        int positionShift = 0;
+        if(car.getDirection() == Direction.LEFT){
+            return positionShift -= car.getStepsize();
+        }else{
+            return positionShift += car.getDirection();
+        }
+    }
+    
+    private void setNewCarPosition(int carIndex){
+        Car currentCar = this.cars[carIndex];
+        int[][] currentCarPosition = this.map.getCarPositions();
+        currentCarPosition[carIndex][0] += this.getNewCarPosition(currentCar);
     }
     
     private void updateCarPositions(){
-        
+        for(int x = 0;x <= this.map.getCarPositions().length;x++){
+            this.setNewCarPosition(x);
+        }
     }
     
     private void keyUp(){
-        
+        int[] currentPosition = this.map.getFrogPosition();
+        currentPosition[1] -= this.frog.getStepsize();
+        this.map.setFrogPosition(currentPosition);
     }
 
     private void keyLeft(){
-        
+        int[] currentPosition = this.map.getFrogPosition();
+        currentPosition[0] -= this.frog.getStepsize();
+        this.map.setFrogPosition(currentPosition);
     }
     
     private void keyRight(){
-        
+        int[] currentPosition = this.map.getFrogPosition();
+        currentPosition[0] += this.frog.getStepsize();
+        this.map.setFrogPosition(currentPosition);
     }
     
     private void keyDown(){
-        
+        int[] currentPosition = this.map.getFrogPosition();
+        currentPosition[1] += this.frog.getStepsize();
+        this.map.setFrogPosition(currentPosition);
     }
     
     private int isCollided(){
@@ -44,12 +78,12 @@ public class GameCtr implements GameCtrInterface {
     
     @Override
     public void setFrog(Frog frog) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.frog = frog;
     }
 
     @Override
     public void setCars(Car[] cars) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.cars = cars;
     }
 
     @Override
@@ -59,12 +93,13 @@ public class GameCtr implements GameCtrInterface {
 
     @Override
     public int getLevel() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.level;
     }
 
     @Override
     public int levelUp() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.level += 1;
+        return this.level;
     }
 
     @Override
@@ -74,7 +109,7 @@ public class GameCtr implements GameCtrInterface {
 
     @Override
     public int getUpdateSpeed() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.updateSpeed;
     }
     
 }
