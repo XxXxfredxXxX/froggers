@@ -11,22 +11,22 @@ public class Map implements MapInterface{
 
     @Override
     public void setFrogPosition(int[] frogPosition) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.frogPosition = frogPosition;
     }
 
     @Override
     public void setCarPosition(int[][] carPositions) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.carPositions = carPositions;
     }
 
     @Override
     public int[] getFrogPosition() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.frogPosition;
     }
 
     @Override
     public int[][] getCarPositions() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.carPositions;
     }
     
 }
