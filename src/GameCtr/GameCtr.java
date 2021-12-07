@@ -4,6 +4,9 @@ import Direction.Direction;
 import GameObjects.Car;
 import GameObjects.Frog;
 import Map.Map;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -98,7 +101,7 @@ public class GameCtr implements GameCtrInterface {
             try {
                 TimeUnit.MILLISECONDS.sleep(1000/this.updateSpeed);
             } catch (InterruptedException ex) {
-                Logger.getLogger(GameCtr.class.getName()).log(Level.SEVERE, null, ex);
+                java.util.logging.Logger.getLogger(GameCtr.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
         }
     }
