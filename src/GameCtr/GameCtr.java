@@ -88,7 +88,19 @@ public class GameCtr implements GameCtrInterface {
 
     @Override
     public void start() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        while(true){
+            for(int x = 0;x < cars.length;x++){
+                this.isCarColidetWithFrog(x);
+            }
+            if(this.frog.isDead()){
+                this.updateCarPositions();
+            }
+            try {
+                TimeUnit.MILLISECONDS.sleep(1000/this.updateSpeed);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(GameCtr.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     @Override
