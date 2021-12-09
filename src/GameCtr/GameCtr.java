@@ -3,9 +3,8 @@ package GameCtr;
 import Direction.Direction;
 import GameObjects.Car;
 import GameObjects.Frog;
+import Geometry.Rectangle;
 import Map.Map;
-import java.lang.System.Logger;
-import java.lang.System.Logger.Level;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -17,7 +16,7 @@ public class GameCtr implements GameCtrInterface {
     private Car[] cars;
     private Frog frog;
     private int level;
-    private int updateSpeed;
+    private int updateSpeed = 1;
     private Map map;
     
     public void setMap(Map map){
@@ -46,7 +45,7 @@ public class GameCtr implements GameCtrInterface {
     }
     
     private void updateCarPositions(){
-        for(int x = 0;x <= this.map.getCarPositions().length;x++){
+        for(int x = 0;x < this.map.carPositions.length;x++){
             this.setNewCarPosition(x);
         }
     }
@@ -76,7 +75,34 @@ public class GameCtr implements GameCtrInterface {
     }
     
     private int isCollided(){
-        return 0;
+        for(int x = 0;x < 3;x++){
+            if(this.isCarColidetWithFrog(x)){
+                return x;
+            }
+        }
+        return Integer.MAX_VALUE;
+    }
+    
+    private Boolean isCarColidetWithFrog(int carId){
+        int[] CarDimension = this.cars[carId].getPictureDimension();
+        int[] CarTopLeftCorner = this.map.carPositions[carId];
+        int[] CarBottomRightCorner = this.map.carPositions[carId];
+        CarBottomRightCorner[0] = CarTopLeftCorner[0] + CarDimension[0];
+        CarBottomRightCorner[1] = CarTopLeftCorner[1] + CarDimension[1];
+        Rectangle first = new Rectangle(CarTopLeftCorner, CarBottomRightCorner);
+        
+        int[] frogDimension = this.frog.getPictureDimension();
+        int[] frogTopLeftCorner = this.map.frogPosition;
+        int[] frogBottomRightCorner = this.map.frogPosition;
+        frogBottomRightCorner[0] = frogTopLeftCorner[0] + frogDimension[0];
+        frogBottomRightCorner[1] = frogBottomRightCorner[1] + frogDimension[0];
+        Rectangle second = new Rectangle(frogTopLeftCorner, frogBottomRightCorner);
+        if(first.isOverLapping(second)){
+            this.cars[carId].colideFrog(this.frog);
+            return true;
+        }else{
+            return false;
+        }
     }
     
     @Override

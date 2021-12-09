@@ -6,10 +6,12 @@
 package View;
 
 import Map.Map;
-import com.sun.jdi.InterfaceType;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Timer;
 
 /**
  *
@@ -19,7 +21,7 @@ public class View extends javax.swing.JFrame implements ViewInterface{
   
     
     
-    private int UPS = 30;
+    private final int UPS = 30;
     public String frogPicturePath;
     public String carPicturePath;
     private Map map;
@@ -49,13 +51,8 @@ public class View extends javax.swing.JFrame implements ViewInterface{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel3 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-
-        jLabel3.setText("jLabel3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,38 +60,27 @@ public class View extends javax.swing.JFrame implements ViewInterface{
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/car.png"))); // NOI18N
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/background.png"))); // NOI18N
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(260, 260, 260)
-                .addComponent(jLabel1))
-            .addComponent(jLabel2)
-            .addComponent(jLabel4)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(640, 640, 640)
-                .addComponent(jLabel1))
-            .addComponent(jLabel2)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(550, 550, 550)
-                .addComponent(jLabel4))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(182, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(172, 172, 172))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(197, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addGap(16, 16, 16)
+                .addComponent(jLabel1)
+                .addGap(49, 49, 49))
         );
 
         pack();
@@ -139,29 +125,25 @@ public class View extends javax.swing.JFrame implements ViewInterface{
     }
     
     @Override
-        public void start() {
+    public void start() {
         this.setVisible(true);
-        while(true){
-            int x = this.map.carPositions[0][0];
-            int y = this.map.carPositions[0][1];
-            this.jLabel2.setLocation(x, y);
-            System.out.println("UPS UPDATED");
-            try {
-                TimeUnit.MILLISECONDS.sleep(1000/UPS);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            
-        }
+        int delay = 33;
+        ActionListener taskPerformer = new ActionListener() {
+           @Override
+           public void actionPerformed(ActionEvent evt) {
+                int x = map.carPositions[0][0];
+                int y = map.carPositions[0][1];
+                jLabel4.setLocation(x, y);
+           }
+        };
+        Timer timer = new Timer(delay, taskPerformer);//ein timer wird erstellt mit dem defenierten delay, objekt taskperformer, dann wird action performed ausgeführt
+        timer.setRepeats(true);//wiederholt fortlaufend
+        timer.start();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 
 
@@ -172,12 +154,12 @@ public class View extends javax.swing.JFrame implements ViewInterface{
 
     @Override
     public void setFrogPicturePath(String frogPicturePath) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.frogPicturePath = frogPicturePath;
     }
 
     @Override
     public void setCarPicturePath(String carPicturePath) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.carPicturePath = carPicturePath;
     }
 
     public void setMap(Map map) {

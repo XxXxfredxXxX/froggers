@@ -4,7 +4,7 @@ package GameObjects;
  *
  * @author fridtjof
  */
-public class Frog {
+public class Frog extends Look {
     private Boolean life = true;
     public final int stepsize = 10;
     
