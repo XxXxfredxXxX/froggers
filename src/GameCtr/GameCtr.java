@@ -16,7 +16,7 @@ public class GameCtr implements GameCtrInterface {
     private Car[] cars;
     private Frog frog;
     private int level;
-    private int updateSpeed = 1;
+    private int updateSpeed = 25;
     private Map map;
     
     public void setMap(Map map){
@@ -34,7 +34,7 @@ public class GameCtr implements GameCtrInterface {
         if(car.getDirection() == Direction.LEFT){
             return positionShift -= car.getStepsize();
         }else{
-            return positionShift += car.getDirection();
+            return positionShift += car.getStepsize();
         }
     }
     
@@ -42,6 +42,7 @@ public class GameCtr implements GameCtrInterface {
         Car currentCar = this.cars[carIndex];
         int[][] currentCarPosition = this.map.getCarPositions();
         currentCarPosition[carIndex][0] += this.getNewCarPosition(currentCar);
+        this.map.setCarPosition(currentCarPosition);
     }
     
     private void updateCarPositions(){
@@ -119,7 +120,7 @@ public class GameCtr implements GameCtrInterface {
     public void start() {
         while(true){
             for(int x = 0;x < cars.length;x++){
-                this.isCarColidetWithFrog(x);
+                //this.isCarColidetWithFrog(x);
             }
             if(this.frog.isDead()){
                 this.updateCarPositions();
