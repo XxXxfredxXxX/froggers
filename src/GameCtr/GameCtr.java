@@ -16,7 +16,7 @@ public class GameCtr implements GameCtrInterface {
     private Car[] cars;
     private Frog frog;
     private int level;
-    private int updateSpeed = 25;
+    private int updateSpeed = 30;
     private Map map;
     
     public void setMap(Map map){
@@ -86,15 +86,15 @@ public class GameCtr implements GameCtrInterface {
     
     private Boolean isCarColidetWithFrog(int carId){
         int[] CarDimension = this.cars[carId].getPictureDimension();
-        int[] CarTopLeftCorner = this.map.carPositions[carId];
-        int[] CarBottomRightCorner = this.map.carPositions[carId];
+        int[] CarTopLeftCorner = this.map.carPositions[carId].clone();
+        int[] CarBottomRightCorner = this.map.carPositions[carId].clone();
         CarBottomRightCorner[0] = CarTopLeftCorner[0] + CarDimension[0];
         CarBottomRightCorner[1] = CarTopLeftCorner[1] + CarDimension[1];
         Rectangle first = new Rectangle(CarTopLeftCorner, CarBottomRightCorner);
         
         int[] frogDimension = this.frog.getPictureDimension();
-        int[] frogTopLeftCorner = this.map.frogPosition;
-        int[] frogBottomRightCorner = this.map.frogPosition;
+        int[] frogTopLeftCorner = this.map.frogPosition.clone();
+        int[] frogBottomRightCorner = this.map.frogPosition.clone();
         frogBottomRightCorner[0] = frogTopLeftCorner[0] + frogDimension[0];
         frogBottomRightCorner[1] = frogBottomRightCorner[1] + frogDimension[0];
         Rectangle second = new Rectangle(frogTopLeftCorner, frogBottomRightCorner);
@@ -120,7 +120,7 @@ public class GameCtr implements GameCtrInterface {
     public void start() {
         while(true){
             for(int x = 0;x < cars.length;x++){
-                //this.isCarColidetWithFrog(x);
+                this.isCarColidetWithFrog(x);
             }
             if(this.frog.isDead()){
                 this.updateCarPositions();

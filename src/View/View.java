@@ -127,7 +127,7 @@ public class View extends javax.swing.JFrame implements ViewInterface{
     @Override
     public void start() {
         this.setVisible(true);
-        int delay = 33;
+        int delay = 20;
         ActionListener taskPerformer = new ActionListener() {
            @Override
            public void actionPerformed(ActionEvent evt) {
