@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 import javax.swing.Timer;
 
 /**
@@ -69,18 +70,19 @@ public class View extends javax.swing.JFrame implements ViewInterface{
                 .addComponent(jLabel4)
                 .addGap(57, 57, 57)
                 .addComponent(jLabel1)
-                .addContainerGap(172, Short.MAX_VALUE))
+                .addContainerGap(215, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(197, Short.MAX_VALUE)
-                .addComponent(jLabel4)
-                .addGap(165, 165, 165))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(114, 114, 114)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(197, 197, 197)
+                        .addComponent(jLabel4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(114, 114, 114)
+                        .addComponent(jLabel1)))
+                .addContainerGap(200, Short.MAX_VALUE))
         );
 
         pack();
@@ -136,8 +138,7 @@ public class View extends javax.swing.JFrame implements ViewInterface{
                 jLabel4.setLocation(x, y);
                 x = map.frogPosition[0];
                 y = map.frogPosition[1];
-                jLabel1.setLocation(x, y);
-           }
+                jLabel1.setLocation(x, y);           }
         };
         Timer timer = new Timer(delay, taskPerformer);//ein timer wird erstellt mit dem defenierten delay, objekt taskperformer, dann wird action performed ausgeführt
         timer.setRepeats(true);//wiederholt fortlaufend

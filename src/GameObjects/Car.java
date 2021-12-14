@@ -1,6 +1,7 @@
 package GameObjects;
 
 import Direction.Direction;
+import java.util.Random;
 
 /**
  *
@@ -8,8 +9,14 @@ import Direction.Direction;
  */
 public class Car extends Look{
     private final int speed = 100;
-    private int direction = Direction.RIGHT;
+    private int direction;
     public final int stepsize = 2;
+
+    public Car() {
+        Random rand = new Random();
+        int[] directions = {Direction.LEFT,Direction.RIGHT};
+        this.direction = directions[rand.nextInt(2)];
+    }
 
     public int getSpeed() {
         return this.speed;
