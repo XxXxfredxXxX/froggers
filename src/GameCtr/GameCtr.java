@@ -106,6 +106,12 @@ public class GameCtr implements GameCtrInterface {
         }
     }
     
+    private void CarOutOfBorder(int carIndex){
+        if(this.cars[carIndex].getDirection() == Direction.LEFT){
+            
+        }
+    }
+    
     @Override
     public void setFrog(Frog frog) {
         this.frog = frog;
@@ -120,7 +126,8 @@ public class GameCtr implements GameCtrInterface {
     public void start() {
         while(true){
             for(int x = 0;x < cars.length;x++){
-                //this.isCarColidetWithFrog(x);
+                this.isCarColidetWithFrog(x);
+                this.CarOutOfBorder(x);
             }
             if(this.frog.isDead()){
                 this.updateCarPositions();
