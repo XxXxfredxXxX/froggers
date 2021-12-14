@@ -14,13 +14,30 @@ public class Rectangle {
     }
     
     public boolean isOverLapping(Rectangle other){
-        if (this.topLeft[0] > other.bottomRight[0] // R1 is right to R2 
-            || this.bottomRight[0] < other.topLeft[0] // R1 is left to R2 
-            || this.topLeft[1] < other.bottomRight[1] // R1 is above R2 
-            || this.bottomRight[1] > other.topLeft[1]) { // R1 is below R1 
-            return false; 
+        
+        if(other.bottomRight[0] - this.topLeft[0] <= 100 &&
+           other.bottomRight[0] - this.topLeft[0] >= 0   &&
+           this.bottomRight[1] - other.topLeft[1] <= 100 &&
+           this.bottomRight[1] - other.topLeft[1] >= 0   ||
+           this.topLeft[0] - other.bottomRight[0] <= 100 &&
+           this.topLeft[0] - other.bottomRight[0] >= 0   &&
+           other.topLeft[1] - this.bottomRight[1] <= 100 &&
+           other.topLeft[1] - this.bottomRight[1] >= 0
+        ){
+            return true;
         }
-        return true;
+        if(this.bottomRight[0] - other.topLeft[0] <= 100 &&
+           this.bottomRight[0] - other.topLeft[0] >= 0   &&
+           this.bottomRight[1] - other.topLeft[1] <= 100 &&
+           this.bottomRight[1] - other.topLeft[1] >= 0   ||
+           other.bottomRight[0] - this.bottomRight[0] <= 100 &&
+           other.bottomRight[0] - this.bottomRight[0] >= 0   &&
+           other.bottomRight[1] - this.bottomRight[1] <= 100 &&
+           other.bottomRight[1] - this.bottomRight[1] >= 0
+        ){
+            return true;
+        }
+        return false;
     }
     
 }
