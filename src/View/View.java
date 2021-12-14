@@ -134,6 +134,9 @@ public class View extends javax.swing.JFrame implements ViewInterface{
                 int x = map.carPositions[0][0];
                 int y = map.carPositions[0][1];
                 jLabel4.setLocation(x, y);
+                x = map.frogPosition[0];
+                y = map.frogPosition[1];
+                jLabel1.setLocation(x, y);
            }
         };
         Timer timer = new Timer(delay, taskPerformer);//ein timer wird erstellt mit dem defenierten delay, objekt taskperformer, dann wird action performed ausgeführt
