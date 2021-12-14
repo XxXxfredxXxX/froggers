@@ -120,7 +120,7 @@ public class GameCtr implements GameCtrInterface {
     public void start() {
         while(true){
             for(int x = 0;x < cars.length;x++){
-                this.isCarColidetWithFrog(x);
+                //this.isCarColidetWithFrog(x);
             }
             if(this.frog.isDead()){
                 this.updateCarPositions();
