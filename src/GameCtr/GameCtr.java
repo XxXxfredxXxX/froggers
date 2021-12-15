@@ -6,7 +6,8 @@ import GameObjects.Frog;
 import Geometry.Rectangle;
 import Map.Map;
 import java.util.concurrent.TimeUnit;
-
+import java.util.Arrays;
+import java.util.ArrayList;
 /**
  *
  * @author fridtjof
@@ -19,6 +20,8 @@ public class GameCtr implements GameCtrInterface {
     private int updateSpeed = 30;
     private Map map;
     
+    
+    
     public void setMap(Map map){
         this.map = map;
     }
@@ -26,6 +29,25 @@ public class GameCtr implements GameCtrInterface {
     private void setLevel(int level){
         this.level = level;
     }
+    
+
+    
+    public void returnCarImagesToMap(Car[] cars)
+    {
+        
+        System.out.println(cars.length);
+        String[] carPicturePathList = new String[cars.length];
+
+        for(int i = 0; i < cars.length; i++)
+        {
+
+              carPicturePathList[i] = cars[i].getPicturePath();
+        }               
+        this.map.setCarPicturePaths(carPicturePathList);
+        
+    }
+    
+    
     
     
     
@@ -144,6 +166,9 @@ public class GameCtr implements GameCtrInterface {
         return this.level;
     }
 
+
+    
+    
     @Override
     public void stop() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

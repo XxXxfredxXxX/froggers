@@ -4,10 +4,10 @@
  * and open the template in the editor.
  */
 package View;
-
 import Map.Map;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,7 +26,6 @@ public class View extends javax.swing.JFrame implements ViewInterface{
     public String frogPicturePath;
     public String carPicturePath;
     private Map map;
-
     public View() {
         initComponents();
     }
@@ -42,6 +41,16 @@ public class View extends javax.swing.JFrame implements ViewInterface{
     private int[] getWindowDimension() {
         return this.map.dimension;
     }
+    
+    /**
+     *
+     * @param index
+     * @return String picturepath of car
+     */
+    public String getPictureOfCar(int index)
+    {
+        return this.map.carPicturePaths[index];
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -54,23 +63,25 @@ public class View extends javax.swing.JFrame implements ViewInterface{
 
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        //jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/frog.png"))); // NOI18N
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/car.png"))); // NOI18N
+        //jLabel5.setIcon(new javax.swing.ImageIcon(this.getPictureOfCar(1)));
+        jLabel4.setIcon(new javax.swing.ImageIcon(this.getPictureOfCar(0)));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(34, 34, 34)
                 .addComponent(jLabel4)
-                .addGap(57, 57, 57)
+                .addGap(48, 48, 48)
                 .addComponent(jLabel1)
-                .addContainerGap(215, Short.MAX_VALUE))
+                .addContainerGap(315, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -82,13 +93,20 @@ public class View extends javax.swing.JFrame implements ViewInterface{
                     .addGroup(layout.createSequentialGroup()
                         .addGap(114, 114, 114)
                         .addComponent(jLabel1)))
-                .addContainerGap(200, Short.MAX_VALUE))
+                .addContainerGap(283, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    
+    
+    private void initalizeCars()
+    {
+        
+    }
     /**
      * @param args the command line arguments
      */
@@ -149,7 +167,9 @@ public class View extends javax.swing.JFrame implements ViewInterface{
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
-
+    private javax.swing.JLabel jLabel5;
+    
+    
 
     @Override
     public void stop() {
@@ -161,8 +181,10 @@ public class View extends javax.swing.JFrame implements ViewInterface{
         this.frogPicturePath = frogPicturePath;
     }
 
+
     @Override
     public void setCarPicturePath(String carPicturePath) {
+        
         this.carPicturePath = carPicturePath;
     }
 
