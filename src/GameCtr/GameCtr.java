@@ -22,7 +22,7 @@ public class GameCtr implements GameCtrInterface {
     public void setMap(Map map){
         this.map = map;
     }
-    
+     
     private void setLevel(int level){
         this.level = level;
     }
@@ -63,25 +63,25 @@ public class GameCtr implements GameCtrInterface {
         }
     }
     
-    private void keyUp(){
+    public void keyUp(){
         int[] currentPosition = this.map.getFrogPosition();
         currentPosition[1] -= this.frog.getStepsize();
         this.map.setFrogPosition(currentPosition);
     }
 
-    private void keyLeft(){
+    public void keyLeft(){
         int[] currentPosition = this.map.getFrogPosition();
         currentPosition[0] -= this.frog.getStepsize();
         this.map.setFrogPosition(currentPosition);
     }
     
-    private void keyRight(){
+    public void keyRight(){
         int[] currentPosition = this.map.getFrogPosition();
         currentPosition[0] += this.frog.getStepsize();
         this.map.setFrogPosition(currentPosition);
     }
     
-    private void keyDown(){
+    public void keyDown(){
         int[] currentPosition = this.map.getFrogPosition();
         currentPosition[1] += this.frog.getStepsize();
         this.map.setFrogPosition(currentPosition);
