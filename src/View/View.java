@@ -5,6 +5,8 @@
  */
 package View;
 
+import GameCtr.GameCtr;
+import GameCtr.KeyListenerFrogMovement;
 import Map.Map;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,9 +28,15 @@ public class View extends javax.swing.JFrame implements ViewInterface{
     public String frogPicturePath;
     public String carPicturePath;
     private Map map;
+    private GameCtr game;
+    private KeyListenerFrogMovement frogMovement;
 
     public View() {
         initComponents();
+    }
+    
+    public void setGameCtr(GameCtr game){
+        this.game = game;
     }
     
     private int[][] getNewCarPosition() {
@@ -130,6 +138,10 @@ public class View extends javax.swing.JFrame implements ViewInterface{
     public void start() {
         this.setVisible(true);
         int delay = 20;
+        KeyListenerFrogMovement frogMovement = new KeyListenerFrogMovement();//Neues Keylistwn
+        this.addKeyListener(frogMovement);
+        this.frogMovement = frogMovement;
+        this.frogMovement.setGameCtr(this.game);
         ActionListener taskPerformer = new ActionListener() {
            @Override
            public void actionPerformed(ActionEvent evt) {

@@ -31,6 +31,7 @@ public class main {
         game.setMap(map);
         View view = new View();
         view.setMap(map);
+        view.setGameCtr(game);
         view.start();
         game.start();
     }
