@@ -61,36 +61,55 @@ public class View extends javax.swing.JFrame implements ViewInterface{
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        car1 = new javax.swing.JLabel();
+        car2 = new javax.swing.JLabel();
+        car3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/frog.png"))); // NOI18N
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/car.png"))); // NOI18N
+        car1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/car.png"))); // NOI18N
+
+        car2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/car.png"))); // NOI18N
+
+        car3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/car.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jLabel4)
-                .addGap(57, 57, 57)
-                .addComponent(jLabel1)
-                .addContainerGap(215, Short.MAX_VALUE))
+                .addGap(47, 47, 47)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(car3)
+                        .addGap(35, 35, 35)
+                        .addComponent(car1)))
+                .addGap(32, 32, 32)
+                .addComponent(car2)
+                .addContainerGap(83, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(114, 114, 114)
+                .addComponent(jLabel1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(197, 197, 197)
-                        .addComponent(jLabel4))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(114, 114, 114)
-                        .addComponent(jLabel1)))
-                .addContainerGap(200, Short.MAX_VALUE))
+                        .addGap(35, 35, 35)
+                        .addComponent(car1)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(car2)
+                                .addGap(160, 160, 160))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(car3)
+                                .addGap(181, 181, 181))))))
         );
 
         pack();
@@ -147,7 +166,13 @@ public class View extends javax.swing.JFrame implements ViewInterface{
            public void actionPerformed(ActionEvent evt) {
                 int x = map.carPositions[0][0];
                 int y = map.carPositions[0][1];
-                jLabel4.setLocation(x, y);
+                car1.setLocation(x, y);
+                x = map.carPositions[1][0];
+                y = map.carPositions[1][1];
+                car2.setLocation(x, y);
+                x = map.carPositions[2][0];
+                y = map.carPositions[2][1];
+                car3.setLocation(x, y);
                 x = map.frogPosition[0];
                 y = map.frogPosition[1];
                 jLabel1.setLocation(x, y);           }
@@ -158,8 +183,10 @@ public class View extends javax.swing.JFrame implements ViewInterface{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel car1;
+    private javax.swing.JLabel car2;
+    private javax.swing.JLabel car3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
 
 
