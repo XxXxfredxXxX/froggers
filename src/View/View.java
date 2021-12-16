@@ -64,6 +64,7 @@ public class View extends javax.swing.JFrame implements ViewInterface{
         car1 = new javax.swing.JLabel();
         car2 = new javax.swing.JLabel();
         car3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,26 +76,35 @@ public class View extends javax.swing.JFrame implements ViewInterface{
 
         car3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/car.png"))); // NOI18N
 
+        jLabel2.setText("Level: ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(car3)
-                        .addGap(35, 35, 35)
-                        .addComponent(car1)))
-                .addGap(32, 32, 32)
-                .addComponent(car2)
+                        .addGap(47, 47, 47)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(car3)
+                                .addGap(35, 35, 35)
+                                .addComponent(car1)))
+                        .addGap(32, 32, 32)
+                        .addComponent(car2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2)))
                 .addContainerGap(83, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(114, 114, 114)
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addGap(89, 89, 89)
                 .addComponent(jLabel1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -164,6 +174,7 @@ public class View extends javax.swing.JFrame implements ViewInterface{
         ActionListener taskPerformer = new ActionListener() {
            @Override
            public void actionPerformed(ActionEvent evt) {
+                jLabel2.setText("Level: " + Integer.toString(game.getLevel()));
                 int x = map.carPositions[0][0];
                 int y = map.carPositions[0][1];
                 car1.setLocation(x, y);
@@ -187,6 +198,7 @@ public class View extends javax.swing.JFrame implements ViewInterface{
     private javax.swing.JLabel car2;
     private javax.swing.JLabel car3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 
 

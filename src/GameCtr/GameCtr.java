@@ -18,6 +18,10 @@ public class GameCtr implements GameCtrInterface {
     private int level;
     private int updateSpeed = 30;
     private Map map;
+
+    public GameCtr() {
+        this.level = 1;
+    }
     
     public void setMap(Map map){
         this.map = map;
