@@ -38,7 +38,19 @@ public class GameCtr implements GameCtrInterface {
         }
     }
     
+    private void resetCarPositionIfNeeded(int carIndex) {
+        int[][] currentCarPosition = this.map.getCarPositions();
+        if(currentCarPosition[carIndex][0] < 0){
+            currentCarPosition[carIndex][0] = 399;
+            this.map.setCarPosition(currentCarPosition);
+        }else if(currentCarPosition[carIndex][0] >= 400 - this.cars[carIndex].stepsize){
+            currentCarPosition[carIndex][0] = 1 + this.cars[carIndex].stepsize;
+            this.map.setCarPosition(currentCarPosition);
+        }
+    }
+    
     private void setNewCarPosition(int carIndex){
+        this.resetCarPositionIfNeeded(carIndex);
         Car currentCar = this.cars[carIndex];
         int[][] currentCarPosition = this.map.getCarPositions();
         currentCarPosition[carIndex][0] += this.getNewCarPosition(currentCar);
