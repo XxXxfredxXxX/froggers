@@ -16,13 +16,13 @@ public class GameCtr implements GameCtrInterface {
     private Car[] cars;
     private Frog frog;
     private int level;
-    private int updateSpeed = 25;
+    private int updateSpeed = 30;
     private Map map;
     
     public void setMap(Map map){
         this.map = map;
     }
-    
+     
     private void setLevel(int level){
         this.level = level;
     }
@@ -38,7 +38,19 @@ public class GameCtr implements GameCtrInterface {
         }
     }
     
+    private void resetCarPositionIfNeeded(int carIndex) {
+        int[][] currentCarPosition = this.map.getCarPositions();
+        if(currentCarPosition[carIndex][0] < 0){
+            currentCarPosition[carIndex][0] = 399;
+            this.map.setCarPosition(currentCarPosition);
+        }else if(currentCarPosition[carIndex][0] >= 400 - this.cars[carIndex].stepsize){
+            currentCarPosition[carIndex][0] = 1 + this.cars[carIndex].stepsize;
+            this.map.setCarPosition(currentCarPosition);
+        }
+    }
+    
     private void setNewCarPosition(int carIndex){
+        this.resetCarPositionIfNeeded(carIndex);
         Car currentCar = this.cars[carIndex];
         int[][] currentCarPosition = this.map.getCarPositions();
         currentCarPosition[carIndex][0] += this.getNewCarPosition(currentCar);
@@ -51,25 +63,25 @@ public class GameCtr implements GameCtrInterface {
         }
     }
     
-    private void keyUp(){
+    public void keyUp(){
         int[] currentPosition = this.map.getFrogPosition();
         currentPosition[1] -= this.frog.getStepsize();
         this.map.setFrogPosition(currentPosition);
     }
 
-    private void keyLeft(){
+    public void keyLeft(){
         int[] currentPosition = this.map.getFrogPosition();
         currentPosition[0] -= this.frog.getStepsize();
         this.map.setFrogPosition(currentPosition);
     }
     
-    private void keyRight(){
+    public void keyRight(){
         int[] currentPosition = this.map.getFrogPosition();
         currentPosition[0] += this.frog.getStepsize();
         this.map.setFrogPosition(currentPosition);
     }
     
-    private void keyDown(){
+    public void keyDown(){
         int[] currentPosition = this.map.getFrogPosition();
         currentPosition[1] += this.frog.getStepsize();
         this.map.setFrogPosition(currentPosition);
@@ -86,15 +98,15 @@ public class GameCtr implements GameCtrInterface {
     
     private Boolean isCarColidetWithFrog(int carId){
         int[] CarDimension = this.cars[carId].getPictureDimension();
-        int[] CarTopLeftCorner = this.map.carPositions[carId];
-        int[] CarBottomRightCorner = this.map.carPositions[carId];
+        int[] CarTopLeftCorner = this.map.carPositions[carId].clone();
+        int[] CarBottomRightCorner = this.map.carPositions[carId].clone();
         CarBottomRightCorner[0] = CarTopLeftCorner[0] + CarDimension[0];
         CarBottomRightCorner[1] = CarTopLeftCorner[1] + CarDimension[1];
         Rectangle first = new Rectangle(CarTopLeftCorner, CarBottomRightCorner);
         
         int[] frogDimension = this.frog.getPictureDimension();
-        int[] frogTopLeftCorner = this.map.frogPosition;
-        int[] frogBottomRightCorner = this.map.frogPosition;
+        int[] frogTopLeftCorner = this.map.frogPosition.clone();
+        int[] frogBottomRightCorner = this.map.frogPosition.clone();
         frogBottomRightCorner[0] = frogTopLeftCorner[0] + frogDimension[0];
         frogBottomRightCorner[1] = frogBottomRightCorner[1] + frogDimension[0];
         Rectangle second = new Rectangle(frogTopLeftCorner, frogBottomRightCorner);
@@ -103,6 +115,12 @@ public class GameCtr implements GameCtrInterface {
             return true;
         }else{
             return false;
+        }
+    }
+    
+    private void CarOutOfBorder(int carIndex){
+        if(this.cars[carIndex].getDirection() == Direction.LEFT){
+            
         }
     }
     
@@ -120,7 +138,8 @@ public class GameCtr implements GameCtrInterface {
     public void start() {
         while(true){
             for(int x = 0;x < cars.length;x++){
-                //this.isCarColidetWithFrog(x);
+                this.isCarColidetWithFrog(x);
+                this.CarOutOfBorder(x);
             }
             if(this.frog.isDead()){
                 this.updateCarPositions();

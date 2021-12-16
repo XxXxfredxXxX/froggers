@@ -23,14 +23,15 @@ public class main {
         car3.setPicturePath("src/img/car.png");
         Car[] cars = new Car[] {car1,car2,car3};
         Map map = new Map();
-        map.setFrogPosition(new int[]{0,0});
-        map.setCarPosition(new int[][]{{100,100},{200,200},{300,300}});
+        map.setFrogPosition(new int[]{300,401});
+        map.setCarPosition(new int[][]{{100,100},{100,200},{100,300}});
         GameCtr game = new GameCtr();
         game.setFrog(frog);
         game.setCars(cars);
         game.setMap(map);
         View view = new View();
         view.setMap(map);
+        view.setGameCtr(game);
         view.start();
         game.start();
     }
