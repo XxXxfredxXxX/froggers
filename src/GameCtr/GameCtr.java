@@ -32,6 +32,24 @@ public class GameCtr implements GameCtrInterface {
     }
     
     
+        public void returnCarImagesToMap(Car[] cars)
+    {
+        
+        System.out.println(cars.length);
+        String[] carPicturePathList = new String[cars.length];
+
+        for(int i = 0; i < cars.length; i++)
+        {
+
+              carPicturePathList[i] = cars[i].getPicturePath();
+        }               
+        this.map.setCarPicturePaths(carPicturePathList);
+        System.out.println(carPicturePathList[0]);
+        System.out.println(carPicturePathList[1]);
+        System.out.println(carPicturePathList[2]);
+    }
+    
+    
     
     private int getNewCarPosition(Car car){
         int positionShift = 0;
@@ -142,6 +160,11 @@ public class GameCtr implements GameCtrInterface {
     @Override
     public void setCars(Car[] cars) {
         this.cars = cars;
+    }
+    
+    
+    public Car[] getCars() {
+        return this.cars;
     }
 
     @Override

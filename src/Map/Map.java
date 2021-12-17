@@ -8,10 +8,20 @@ public class Map implements MapInterface{
     public int[] dimension;
     public int[] frogPosition;
     public int[][] carPositions;
+    public String[] carPicturePaths;
 
     @Override
     public void setFrogPosition(int[] frogPosition) {
         this.frogPosition = frogPosition;
+    }
+    
+    
+    public String[] getCarPicturePaths() {
+        return carPicturePaths;
+    }
+
+    public void setCarPicturePaths(String[] carPicturePaths) {
+        this.carPicturePaths = carPicturePaths;
     }
 
     @Override
