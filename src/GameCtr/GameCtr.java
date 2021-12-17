@@ -192,6 +192,7 @@ public void keyUp(){
             this.levelUp();
             this.setNewCarXPositions();
             this.updateSpeed += 5;
+            this.setNewCarDirection();
         }
     }
     
