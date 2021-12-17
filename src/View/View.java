@@ -95,7 +95,7 @@ public class View extends javax.swing.JFrame implements ViewInterface{
                         .addGap(32, 32, 32)
                         .addComponent(car2))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(20, 20, 20)
                         .addComponent(jLabel2)))
                 .addContainerGap(83, Short.MAX_VALUE))
         );
@@ -104,7 +104,7 @@ public class View extends javax.swing.JFrame implements ViewInterface{
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addGap(89, 89, 89)
+                .addGap(86, 86, 86)
                 .addComponent(jLabel1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -164,7 +164,7 @@ public class View extends javax.swing.JFrame implements ViewInterface{
     }
     
     @Override
-    public void start() {
+    public void start() {        
         this.setVisible(true);
         int delay = 20;
         KeyListenerFrogMovement frogMovement = new KeyListenerFrogMovement();//Neues Keylistwn
