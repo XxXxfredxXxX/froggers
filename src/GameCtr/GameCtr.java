@@ -6,8 +6,11 @@ import GameObjects.Car;
 import GameObjects.Frog;
 import Geometry.Rectangle;
 import Map.Map;
+import java.io.IOException;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -187,7 +190,11 @@ public void keyUp(){
         for(int x = 0;x < this.cars.length;x++){
             Random rand = new Random();
             int[] directions = {Direction.LEFT,Direction.RIGHT};
-            this.cars[x].setDirection(directions[rand.nextInt(2)]);
+            try {
+                this.map.carPicturePaths[x] = this.cars[x].setDirection(directions[rand.nextInt(2)]);
+            } catch (IOException ex) {
+                Logger.getLogger(GameCtr.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     

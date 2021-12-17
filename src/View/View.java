@@ -42,6 +42,7 @@ public class View extends javax.swing.JFrame implements ViewInterface{
     private GameCtr game;
     private Frog frog;
     private KeyListenerFrogMovement frogMovement;
+    private int currentLevel;
 
     /**
      *map is nice
@@ -57,6 +58,7 @@ public class View extends javax.swing.JFrame implements ViewInterface{
     
     public void setGameCtr(GameCtr game){
         this.game = game;
+        this.currentLevel = this.game.getLevel();
     }
     
     
@@ -106,7 +108,7 @@ public class View extends javax.swing.JFrame implements ViewInterface{
 
         car3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/car.png"))); // NOI18N
 
-        jLabel2.setText("Level: ");
+        jLabel2.setText("Level: 1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -222,9 +224,15 @@ public class View extends javax.swing.JFrame implements ViewInterface{
         
         
         ActionListener taskPerformer = new ActionListener() {
-           @Override
-           public void actionPerformed(ActionEvent evt) {
-                jLabel2.setText("Level: " + Integer.toString(game.getLevel()));
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                if(currentLevel != game.getLevel()){
+                    currentLevel = game.getLevel();
+                    jLabel2.setText("Level: " + Integer.toString(game.getLevel()));
+                    car1.setIcon(new ImageIcon(map.carPicturePaths[0]));
+                    car2.setIcon(new ImageIcon(map.carPicturePaths[1]));
+                    car3.setIcon(new ImageIcon(map.carPicturePaths[2]));
+                }
                 int x = map.carPositions[0][0];
                 int y = map.carPositions[0][1];
                 car1.setLocation(x, y);
@@ -286,16 +294,4 @@ public class View extends javax.swing.JFrame implements ViewInterface{
     public void setMap() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    public void playSound() {
-    try {
-        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("src/Audio/car-crash.wav").getAbsoluteFile());
-        Clip clip = AudioSystem.getClip();
-        clip.open(audioInputStream);
-        clip.start();
-    } catch(Exception ex) {
-        System.out.println("Error with playing sound.");
-        ex.printStackTrace();
-    }
-}
 }
