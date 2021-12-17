@@ -1,8 +1,11 @@
 package GameObjects;
 
 import Direction.Direction;
+import Map.Map;
 import java.io.IOException;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -13,22 +16,11 @@ public class Car extends Look{
     private int direction;
     public final int stepsize = 2;
 
-    public Car() throws IOException {
+    public Car(){
         Random rand = new Random();
         int[] directions = {Direction.LEFT,Direction.RIGHT};
         this.direction = directions[rand.nextInt(2)];
-        
-        if(this.getDirection() == 1)
-        {
-            this.setPicturePath("src/img/car_left.png");
-
-        }else
-        {
-            this.setPicturePath("src/img/car_right.png");
-
-        }
-        
-        
+        this.setPictureForDirection();   
     }
 
     public int getSpeed() {
@@ -38,13 +30,31 @@ public class Car extends Look{
     public int getDirection() {
         return this.direction;
     }
+    
+    private void setPictureForDirection(){
+        if(this.getDirection() == 1){
+            try {
+                this.setPicturePath("src/img/car_left.png");
+            } catch (IOException ex) {
+                Logger.getLogger(Car.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            try {
+                this.setPicturePath("src/img/car_right.png");
+            } catch (IOException ex) {
+                Logger.getLogger(Car.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
 
     public int getStepsize() {
         return this.stepsize;
     }
     
-    public void setDirection(int direction){
+    public String setDirection(int direction) throws IOException{
         this.direction = direction;
+        this.setPictureForDirection();
+        return this.getPicturePath();
     }
     
     public void colideFrog(Frog frog){
