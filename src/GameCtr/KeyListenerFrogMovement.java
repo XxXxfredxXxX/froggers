@@ -32,6 +32,10 @@ public class KeyListenerFrogMovement implements KeyListener{
         if(event.getKeyCode()==KeyEvent.VK_D){
             this.game.keyRight();
         }
+        
+        if(event.getKeyCode()==KeyEvent.VK_ENTER){
+            this.game.togglePlay();
+        }
     }
 
     @Override

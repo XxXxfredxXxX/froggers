@@ -19,9 +19,18 @@ public class GameCtr implements GameCtrInterface {
     private int level;
     private int updateSpeed = 30;
     private Map map;
+    private Boolean play = true;
 
     public GameCtr() {
         this.level = 1;
+    }
+    
+    public void togglePlay(){
+        this.play = !this.play;
+    }
+    
+    public Boolean isPlayTrue(){
+        return this.play;
     }
     
     public void setMap(Map map){
@@ -90,7 +99,7 @@ public void keyUp(){
         int[] froglimit = {Integer.MAX_VALUE,0};
         int[] currentPosition = this.map.getFrogPosition();
         
-        if(this.frog.isDead() && currentPosition[1]>froglimit[1]){
+        if(this.frog.isDead() && currentPosition[1]>froglimit[1] && this.isPlayTrue()){
             currentPosition[1] -= this.frog.getStepsize();
             this.map.setFrogPosition(currentPosition);
         }
@@ -100,7 +109,7 @@ public void keyUp(){
         int[] froglimit = {0,Integer.MAX_VALUE};
         int[] currentPosition = this.map.getFrogPosition();
         
-        if(this.frog.isDead() && currentPosition[0]>froglimit[0]){
+        if(this.frog.isDead() && currentPosition[0]>froglimit[0] && this.isPlayTrue()){
             currentPosition[0] -= this.frog.getStepsize();
             this.map.setFrogPosition(currentPosition);
         }
@@ -110,7 +119,7 @@ public void keyUp(){
         int[] froglimit = {400,Integer.MAX_VALUE};
         int[] currentPosition = this.map.getFrogPosition();
         
-        if(this.frog.isDead() && currentPosition[0]<froglimit[0]){
+        if(this.frog.isDead() && currentPosition[0]<froglimit[0] && this.isPlayTrue()){
             currentPosition[0] += this.frog.getStepsize();
             this.map.setFrogPosition(currentPosition);
         }
@@ -120,7 +129,7 @@ public void keyUp(){
         int[] froglimit = {Integer.MAX_VALUE,700};
         int[] currentPosition = this.map.getFrogPosition();
         
-        if(this.frog.isDead() && currentPosition[1]<froglimit[1]){
+        if(this.frog.isDead() && currentPosition[1]<froglimit[1] && this.isPlayTrue()){
             currentPosition[1] += this.frog.getStepsize();
             this.map.setFrogPosition(currentPosition);
         }
@@ -204,13 +213,15 @@ public void keyUp(){
     @Override
     public void start() {
         while(true){
-            for(int x = 0;x < cars.length;x++){
-                this.isCarColidetWithFrog(x);
-                this.CarOutOfBorder(x);
-            }
-            if(this.frog.isDead()){
-                this.updateCarPositions();
-                this.isFrogFinished();
+            if(this.isPlayTrue()){
+                for(int x = 0;x < cars.length;x++){
+                    this.isCarColidetWithFrog(x);
+                    this.CarOutOfBorder(x);
+                }
+                if(this.frog.isDead()){
+                    this.updateCarPositions();
+                    this.isFrogFinished();
+                }
             }
             try {
                 TimeUnit.MILLISECONDS.sleep(1000/this.updateSpeed);
