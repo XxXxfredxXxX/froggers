@@ -86,33 +86,41 @@ public class GameCtr implements GameCtrInterface {
         }
     }
     
-    public void keyUp(){
-        if(this.frog.isDead()){
-            int[] currentPosition = this.map.getFrogPosition();
+public void keyUp(){
+        int[] froglimit = {Integer.MAX_VALUE,0};
+        int[] currentPosition = this.map.getFrogPosition();
+        
+        if(this.frog.isDead() && currentPosition[1]>froglimit[1]){
             currentPosition[1] -= this.frog.getStepsize();
             this.map.setFrogPosition(currentPosition);
         }
     }
 
     public void keyLeft(){
-        if(this.frog.isDead()){
-            int[] currentPosition = this.map.getFrogPosition();
+        int[] froglimit = {0,Integer.MAX_VALUE};
+        int[] currentPosition = this.map.getFrogPosition();
+        
+        if(this.frog.isDead() && currentPosition[0]>froglimit[0]){
             currentPosition[0] -= this.frog.getStepsize();
             this.map.setFrogPosition(currentPosition);
         }
     }
     
     public void keyRight(){
-        if(this.frog.isDead()){
-            int[] currentPosition = this.map.getFrogPosition();
+        int[] froglimit = {400,Integer.MAX_VALUE};
+        int[] currentPosition = this.map.getFrogPosition();
+        
+        if(this.frog.isDead() && currentPosition[0]<froglimit[0]){
             currentPosition[0] += this.frog.getStepsize();
             this.map.setFrogPosition(currentPosition);
         }
     }
     
     public void keyDown(){
-        if(this.frog.isDead()){
-            int[] currentPosition = this.map.getFrogPosition();
+        int[] froglimit = {Integer.MAX_VALUE,700};
+        int[] currentPosition = this.map.getFrogPosition();
+        
+        if(this.frog.isDead() && currentPosition[1]<froglimit[1]){
             currentPosition[1] += this.frog.getStepsize();
             this.map.setFrogPosition(currentPosition);
         }
