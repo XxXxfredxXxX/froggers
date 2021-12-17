@@ -24,7 +24,7 @@ public class View extends javax.swing.JFrame implements ViewInterface{
   
     
     
-    private final int UPS = 30;
+    private final int UPS = 60;
     public String frogPicturePath;
 
     /**
@@ -82,6 +82,7 @@ public class View extends javax.swing.JFrame implements ViewInterface{
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(500, 600));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/frog.png"))); // NOI18N
 
@@ -98,13 +99,19 @@ public class View extends javax.swing.JFrame implements ViewInterface{
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(car3)
-                        .addGap(35, 35, 35)
-                        .addComponent(car1)))
-                .addGap(32, 32, 32)
-                .addComponent(car2)
-                .addContainerGap(183, Short.MAX_VALUE))
-
+                        .addGap(47, 47, 47)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(car3)
+                                .addGap(35, 35, 35)
+                                .addComponent(car1)))
+                        .addGap(32, 32, 32)
+                        .addComponent(car2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2)))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
