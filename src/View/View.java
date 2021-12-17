@@ -7,12 +7,14 @@ package View;
 
 import GameCtr.GameCtr;
 import GameCtr.KeyListenerFrogMovement;
+import GameObjects.Frog;
 import Map.Map;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 
@@ -33,6 +35,7 @@ public class View extends javax.swing.JFrame implements ViewInterface{
     public String carPicturePath;
     private Map map;
     private GameCtr game;
+    private Frog frog;
     private KeyListenerFrogMovement frogMovement;
 
     /**
@@ -41,6 +44,10 @@ public class View extends javax.swing.JFrame implements ViewInterface{
      */
     public View() {
         initComponents();
+    }
+    
+    public void setFrog(Frog frog){
+        this.frog = frog;
     }
     
     public void setGameCtr(GameCtr game){
@@ -219,6 +226,9 @@ public class View extends javax.swing.JFrame implements ViewInterface{
                 x = map.frogPosition[0];
                 y = map.frogPosition[1];
                 jLabel1.setLocation(x, y);
+                if(!frog.isDead()){
+                    jLabel1.setIcon(new ImageIcon("src/img/frog_dead.png"));
+                }
            }
         };
         Timer timer = new Timer(delay, taskPerformer);//ein timer wird erstellt mit dem defenierten delay, objekt taskperformer, dann wird action performed ausgeführt
