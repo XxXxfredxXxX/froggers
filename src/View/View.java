@@ -26,11 +26,19 @@ public class View extends javax.swing.JFrame implements ViewInterface{
     
     private final int UPS = 60;
     public String frogPicturePath;
+
+    /**
+     * funny array
+     */
     public String carPicturePath;
     private Map map;
     private GameCtr game;
     private KeyListenerFrogMovement frogMovement;
 
+    /**
+     *map is nice
+     * @param map
+     */
     public View() {
         initComponents();
     }
@@ -38,6 +46,13 @@ public class View extends javax.swing.JFrame implements ViewInterface{
     public void setGameCtr(GameCtr game){
         this.game = game;
     }
+    
+    
+        public String getPictureOfCars(int index)
+    {
+        return this.map.carPicturePaths[index].substring(3);
+    }
+    
     
     private int[][] getNewCarPosition() {
         return this.map.carPositions;
@@ -71,8 +86,6 @@ public class View extends javax.swing.JFrame implements ViewInterface{
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/frog.png"))); // NOI18N
 
-        car1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/car.png"))); // NOI18N
-
         car2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/car.png"))); // NOI18N
 
         car3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/car.png"))); // NOI18N
@@ -105,7 +118,7 @@ public class View extends javax.swing.JFrame implements ViewInterface{
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addGap(89, 89, 89)
+                .addGap(86, 86, 86)
                 .addComponent(jLabel1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -164,14 +177,32 @@ public class View extends javax.swing.JFrame implements ViewInterface{
         });
     }
     
+    
+    private String returnToGUI()
+    {
+        
+        while(this.map == null)
+        {
+            return "car_right.png";
+            
+        }
+        
+        return "car_left.png";
+    }
+    
     @Override
-    public void start() {
+    public void start() {        
         this.setVisible(true);
         int delay = 20;
         KeyListenerFrogMovement frogMovement = new KeyListenerFrogMovement();//Neues Keylistwn
         this.addKeyListener(frogMovement);
         this.frogMovement = frogMovement;
         this.frogMovement.setGameCtr(this.game);
+        car1.setIcon(new javax.swing.ImageIcon(getClass().getResource((View.this.getPictureOfCars(0)))));
+        car2.setIcon(new javax.swing.ImageIcon(getClass().getResource((View.this.getPictureOfCars(1)))));
+        car3.setIcon(new javax.swing.ImageIcon(getClass().getResource((View.this.getPictureOfCars(2)))));
+        
+        
         ActionListener taskPerformer = new ActionListener() {
            @Override
            public void actionPerformed(ActionEvent evt) {
@@ -187,11 +218,15 @@ public class View extends javax.swing.JFrame implements ViewInterface{
                 car3.setLocation(x, y);
                 x = map.frogPosition[0];
                 y = map.frogPosition[1];
-                jLabel1.setLocation(x, y);           }
+                jLabel1.setLocation(x, y);
+           }
         };
         Timer timer = new Timer(delay, taskPerformer);//ein timer wird erstellt mit dem defenierten delay, objekt taskperformer, dann wird action performed ausgeführt
         timer.setRepeats(true);//wiederholt fortlaufend
         timer.start();
+        
+        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

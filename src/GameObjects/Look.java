@@ -27,4 +27,10 @@ public class Look {
         return this.pictureDimension;
     }
     
+    
+        public String getPicturePath()
+    {
+        return this.picturePath;
+    }
+    
 }
