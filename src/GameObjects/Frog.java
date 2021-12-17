@@ -6,7 +6,7 @@ package GameObjects;
  */
 public class Frog extends Look {
     private Boolean life = true;
-    public final int stepsize = 10;
+    public final int stepsize = 50;
     
     public void die(){
         this.life = false;
