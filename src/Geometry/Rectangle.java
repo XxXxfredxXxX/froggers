@@ -18,11 +18,7 @@ public class Rectangle {
         if(other.bottomRight[0] - this.topLeft[0] <= 100 &&
            other.bottomRight[0] - this.topLeft[0] >= 0   &&
            this.bottomRight[1] - other.topLeft[1] <= 100 &&
-           this.bottomRight[1] - other.topLeft[1] >= 0   ||
-           this.topLeft[0] - other.bottomRight[0] <= 100 &&
-           this.topLeft[0] - other.bottomRight[0] >= 0   &&
-           other.topLeft[1] - this.bottomRight[1] <= 100 &&
-           other.topLeft[1] - this.bottomRight[1] >= 0
+           this.bottomRight[1] - other.topLeft[1] >= 0   
         ){
             return true;
         }
