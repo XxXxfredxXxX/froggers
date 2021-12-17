@@ -24,7 +24,7 @@ public class View extends javax.swing.JFrame implements ViewInterface{
   
     
     
-    private final int UPS = 30;
+    private final int UPS = 60;
     public String frogPicturePath;
     public String carPicturePath;
     private Map map;
@@ -67,6 +67,7 @@ public class View extends javax.swing.JFrame implements ViewInterface{
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(500, 600));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/frog.png"))); // NOI18N
 

@@ -24,7 +24,7 @@ public class main {
         car3.setPicturePath("src/img/car.png");
         Car[] cars = new Car[] {car1,car2,car3};
         Map map = new Map();
-        map.setFrogPosition(new int[]{200,401});
+        map.setFrogPosition(new int[]{200,450});
         Random rand = new Random();
         map.setCarPosition(new int[][]{{rand.nextInt(200)+100,100},{rand.nextInt(200)+100,200},{rand.nextInt(200)+100,300}});
         GameCtr game = new GameCtr();

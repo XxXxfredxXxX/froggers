@@ -5,6 +5,7 @@ import GameObjects.Car;
 import GameObjects.Frog;
 import Geometry.Rectangle;
 import Map.Map;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -68,27 +69,35 @@ public class GameCtr implements GameCtrInterface {
     }
     
     public void keyUp(){
-        int[] currentPosition = this.map.getFrogPosition();
-        currentPosition[1] -= this.frog.getStepsize();
-        this.map.setFrogPosition(currentPosition);
+        if(this.frog.isDead()){
+            int[] currentPosition = this.map.getFrogPosition();
+            currentPosition[1] -= this.frog.getStepsize();
+            this.map.setFrogPosition(currentPosition);
+        }
     }
 
     public void keyLeft(){
-        int[] currentPosition = this.map.getFrogPosition();
-        currentPosition[0] -= this.frog.getStepsize();
-        this.map.setFrogPosition(currentPosition);
+        if(this.frog.isDead()){
+            int[] currentPosition = this.map.getFrogPosition();
+            currentPosition[0] -= this.frog.getStepsize();
+            this.map.setFrogPosition(currentPosition);
+        }
     }
     
     public void keyRight(){
-        int[] currentPosition = this.map.getFrogPosition();
-        currentPosition[0] += this.frog.getStepsize();
-        this.map.setFrogPosition(currentPosition);
+        if(this.frog.isDead()){
+            int[] currentPosition = this.map.getFrogPosition();
+            currentPosition[0] += this.frog.getStepsize();
+            this.map.setFrogPosition(currentPosition);
+        }
     }
     
     public void keyDown(){
-        int[] currentPosition = this.map.getFrogPosition();
-        currentPosition[1] += this.frog.getStepsize();
-        this.map.setFrogPosition(currentPosition);
+        if(this.frog.isDead()){
+            int[] currentPosition = this.map.getFrogPosition();
+            currentPosition[1] += this.frog.getStepsize();
+            this.map.setFrogPosition(currentPosition);
+        }
     }
     
     private int isCollided(){
@@ -127,10 +136,27 @@ public class GameCtr implements GameCtrInterface {
         }
     }
     
-    private void isCarFinished(){
+    private void setNewCarXPositions(){
+        for(int x = 0;x < this.cars.length;x++){
+            Random rand = new Random();
+            this.map.carPositions[x][0] = rand.nextInt(350)+1;
+        }
+    }
+    
+    private void setNewCarDirection(){
+        for(int x = 0;x < this.cars.length;x++){
+            Random rand = new Random();
+            int[] directions = {Direction.LEFT,Direction.RIGHT};
+            this.cars[x].setDirection(directions[rand.nextInt(2)]);
+        }
+    }
+    
+    private void isFrogFinished(){
         if(this.map.frogPosition[1] < 10){
-            this.map.frogPosition[1] = 401;
+            this.map.frogPosition[1] = 450;
             this.levelUp();
+            this.setNewCarXPositions();
+            this.updateSpeed += 5;
         }
     }
     
@@ -153,7 +179,7 @@ public class GameCtr implements GameCtrInterface {
             }
             if(this.frog.isDead()){
                 this.updateCarPositions();
-                this.isCarFinished();
+                this.isFrogFinished();
             }
             try {
                 TimeUnit.MILLISECONDS.sleep(1000/this.updateSpeed);
