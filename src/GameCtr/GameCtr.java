@@ -1,5 +1,6 @@
 package GameCtr;
 
+import Audio.MP3Player;
 import Direction.Direction;
 import GameObjects.Car;
 import GameObjects.Frog;
@@ -160,6 +161,10 @@ public void keyUp(){
         Rectangle second = new Rectangle(frogTopLeftCorner, frogBottomRightCorner);
         if(first.isOverLapping(second)){
             this.cars[carId].colideFrog(this.frog);
+            if(MP3Player.canPlayCrashSound){
+                MP3Player.playSound(MP3Player.carCrashSound);
+                MP3Player.canPlayCrashSound = false;
+            }
             return true;
         }else{
             return false;
