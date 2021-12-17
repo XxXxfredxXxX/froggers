@@ -36,7 +36,7 @@ public class main {
                 View view = new View();
         view.setMap(map);
         view.setGameCtr(game);
-
+        view.setFrog(frog);
         view.start();
         game.start();
         
