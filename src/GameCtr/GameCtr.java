@@ -208,10 +208,10 @@ public void keyUp(){
     private void isFrogFinished(){
         if(this.map.frogPosition[1] < 10){
             this.map.frogPosition[1] = 450;
-            this.levelUp();
             this.setNewCarXPositions();
             this.updateSpeed += 5;
             this.setNewCarDirection();
+            this.levelUp();
         }
     }
     
