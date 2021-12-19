@@ -7,12 +7,19 @@ package View;
 
 import GameCtr.GameCtr;
 import GameCtr.KeyListenerFrogMovement;
+import GameObjects.Frog;
 import Map.Map;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 
@@ -24,7 +31,7 @@ public class View extends javax.swing.JFrame implements ViewInterface{
   
     
     
-    private final int UPS = 30;
+    private final int UPS = 60;
     public String frogPicturePath;
 
     /**
@@ -33,7 +40,9 @@ public class View extends javax.swing.JFrame implements ViewInterface{
     public String carPicturePath;
     private Map map;
     private GameCtr game;
+    private Frog frog;
     private KeyListenerFrogMovement frogMovement;
+    private int currentLevel;
 
     /**
      *map is nice
@@ -43,8 +52,13 @@ public class View extends javax.swing.JFrame implements ViewInterface{
         initComponents();
     }
     
+    public void setFrog(Frog frog){
+        this.frog = frog;
+    }
+    
     public void setGameCtr(GameCtr game){
         this.game = game;
+        this.currentLevel = this.game.getLevel();
     }
     
     
@@ -75,13 +89,19 @@ public class View extends javax.swing.JFrame implements ViewInterface{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jToggleButton1 = new javax.swing.JToggleButton();
         jLabel1 = new javax.swing.JLabel();
         car1 = new javax.swing.JLabel();
         car2 = new javax.swing.JLabel();
         car3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+
+        jToggleButton1.setText("jToggleButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(500, 700));
+        setPreferredSize(new java.awt.Dimension(500, 600));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/frog.png"))); // NOI18N
 
@@ -89,28 +109,36 @@ public class View extends javax.swing.JFrame implements ViewInterface{
 
         car3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/car.png"))); // NOI18N
 
-        jLabel2.setText("Level: ");
+        jLabel2.setText("Level: 1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(47, 47, 47)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(car3)
                         .addGap(35, 35, 35)
                         .addComponent(car1)))
                 .addGap(32, 32, 32)
                 .addComponent(car2)
-                .addContainerGap(183, Short.MAX_VALUE))
-
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
                 .addGap(86, 86, 86)
                 .addComponent(jLabel1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,9 +225,15 @@ public class View extends javax.swing.JFrame implements ViewInterface{
         
         
         ActionListener taskPerformer = new ActionListener() {
-           @Override
-           public void actionPerformed(ActionEvent evt) {
-                jLabel2.setText("Level: " + Integer.toString(game.getLevel()));
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                if(currentLevel != game.getLevel()){
+                    currentLevel = game.getLevel();
+                    jLabel2.setText("Level: " + Integer.toString(game.getLevel()));
+                    car1.setIcon(new ImageIcon(map.carPicturePaths[0]));
+                    car2.setIcon(new ImageIcon(map.carPicturePaths[1]));
+                    car3.setIcon(new ImageIcon(map.carPicturePaths[2]));
+                }
                 int x = map.carPositions[0][0];
                 int y = map.carPositions[0][1];
                 car1.setLocation(x, y);
@@ -212,14 +246,19 @@ public class View extends javax.swing.JFrame implements ViewInterface{
                 x = map.frogPosition[0];
                 y = map.frogPosition[1];
                 jLabel1.setLocation(x, y);
+                if(!frog.isDead()){
+                    jLabel1.setIcon(new ImageIcon("src/img/frog_dead.png"));
+                }
+                if(!game.isPlayTrue()){
+                    jLabel3.setIcon(new ImageIcon("src/img/pause.png"));
+                }else{
+                    jLabel3.setIcon(new ImageIcon(""));
+                }
            }
         };
         Timer timer = new Timer(delay, taskPerformer);//ein timer wird erstellt mit dem defenierten delay, objekt taskperformer, dann wird action performed ausgeführt
         timer.setRepeats(true);//wiederholt fortlaufend
         timer.start();
-        
-        
-
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -228,6 +267,8 @@ public class View extends javax.swing.JFrame implements ViewInterface{
     private javax.swing.JLabel car3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
 
 

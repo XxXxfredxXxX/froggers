@@ -1,15 +1,20 @@
 package GameCtr;
 
+import Audio.MP3Player;
 import Direction.Direction;
 import GameObjects.Car;
 import GameObjects.Frog;
 import Geometry.Rectangle;
 import Map.Map;
+import java.io.IOException;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
- * @author fridtjof
+ * @author Friedrich von Thun, menko
  */
 public class GameCtr implements GameCtrInterface {
     
@@ -18,9 +23,18 @@ public class GameCtr implements GameCtrInterface {
     private int level;
     private int updateSpeed = 30;
     private Map map;
+    private Boolean play = true;
 
     public GameCtr() {
         this.level = 1;
+    }
+    
+    public void togglePlay(){
+        this.play = !this.play;
+    }
+    
+    public Boolean isPlayTrue(){
+        return this.play;
     }
     
     public void setMap(Map map){
@@ -62,10 +76,10 @@ public class GameCtr implements GameCtrInterface {
     
     private void resetCarPositionIfNeeded(int carIndex) {
         int[][] currentCarPosition = this.map.getCarPositions();
-        if(currentCarPosition[carIndex][0] < 0){
+        if(currentCarPosition[carIndex][0] < -100){
             currentCarPosition[carIndex][0] = 399;
             this.map.setCarPosition(currentCarPosition);
-        }else if(currentCarPosition[carIndex][0] >= 400 - this.cars[carIndex].stepsize){
+        }else if(currentCarPosition[carIndex][0] >= 400 + 100 - this.cars[carIndex].stepsize){
             currentCarPosition[carIndex][0] = 1 + this.cars[carIndex].stepsize;
             this.map.setCarPosition(currentCarPosition);
         }
@@ -85,28 +99,44 @@ public class GameCtr implements GameCtrInterface {
         }
     }
     
-    public void keyUp(){
+public void keyUp(){
+        int[] froglimit = {Integer.MAX_VALUE,0};
         int[] currentPosition = this.map.getFrogPosition();
-        currentPosition[1] -= this.frog.getStepsize();
-        this.map.setFrogPosition(currentPosition);
+        
+        if(this.frog.isDead() && currentPosition[1]>froglimit[1] && this.isPlayTrue()){
+            currentPosition[1] -= this.frog.getStepsize();
+            this.map.setFrogPosition(currentPosition);
+        }
     }
 
     public void keyLeft(){
+        int[] froglimit = {0,Integer.MAX_VALUE};
         int[] currentPosition = this.map.getFrogPosition();
-        currentPosition[0] -= this.frog.getStepsize();
-        this.map.setFrogPosition(currentPosition);
+        
+        if(this.frog.isDead() && currentPosition[0]>froglimit[0] && this.isPlayTrue()){
+            currentPosition[0] -= this.frog.getStepsize();
+            this.map.setFrogPosition(currentPosition);
+        }
     }
     
     public void keyRight(){
+        int[] froglimit = {400,Integer.MAX_VALUE};
         int[] currentPosition = this.map.getFrogPosition();
-        currentPosition[0] += this.frog.getStepsize();
-        this.map.setFrogPosition(currentPosition);
+        
+        if(this.frog.isDead() && currentPosition[0]<froglimit[0] && this.isPlayTrue()){
+            currentPosition[0] += this.frog.getStepsize();
+            this.map.setFrogPosition(currentPosition);
+        }
     }
     
     public void keyDown(){
+        int[] froglimit = {Integer.MAX_VALUE,700};
         int[] currentPosition = this.map.getFrogPosition();
-        currentPosition[1] += this.frog.getStepsize();
-        this.map.setFrogPosition(currentPosition);
+        
+        if(this.frog.isDead() && currentPosition[1]<froglimit[1] && this.isPlayTrue()){
+            currentPosition[1] += this.frog.getStepsize();
+            this.map.setFrogPosition(currentPosition);
+        }
     }
     
     private int isCollided(){
@@ -132,12 +162,23 @@ public class GameCtr implements GameCtrInterface {
         frogBottomRightCorner[0] = frogTopLeftCorner[0] + frogDimension[0];
         frogBottomRightCorner[1] = frogBottomRightCorner[1] + frogDimension[0];
         Rectangle second = new Rectangle(frogTopLeftCorner, frogBottomRightCorner);
-        if(first.isOverLapping(second)){
+        int spacing = first.getIntSpacing(second);
+        if(spacing < 90){
             this.cars[carId].colideFrog(this.frog);
+            if(MP3Player.canPlayCrashSound){
+                MP3Player.playSound(MP3Player.carCrashSound);
+                MP3Player.canPlayCrashSound = false;
+            }
             return true;
-        }else{
-            return false;
+        }else if(spacing < 120 && spacing > 90){
+            if(MP3Player.canPlayHonk[carId]){
+                MP3Player.playSound(MP3Player.HonkSound);
+                MP3Player.canPlayHonk[carId] = false;
+            }
+        }else if(spacing > 200){
+            MP3Player.canPlayHonk[carId] = true;
         }
+        return false;
     }
     
     private void CarOutOfBorder(int carIndex){
@@ -145,10 +186,32 @@ public class GameCtr implements GameCtrInterface {
         }
     }
     
-    private void isCarFinished(){
+    private void setNewCarXPositions(){
+        for(int x = 0;x < this.cars.length;x++){
+            Random rand = new Random();
+            this.map.carPositions[x][0] = rand.nextInt(350)+1;
+        }
+    }
+    
+    private void setNewCarDirection(){
+        for(int x = 0;x < this.cars.length;x++){
+            Random rand = new Random();
+            int[] directions = {Direction.LEFT,Direction.RIGHT};
+            try {
+                this.map.carPicturePaths[x] = this.cars[x].setDirection(directions[rand.nextInt(2)]);
+            } catch (IOException ex) {
+                Logger.getLogger(GameCtr.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    private void isFrogFinished(){
         if(this.map.frogPosition[1] < 10){
-            this.map.frogPosition[1] = 401;
+            this.map.frogPosition[1] = 450;
             this.levelUp();
+            this.setNewCarXPositions();
+            this.updateSpeed += 5;
+            this.setNewCarDirection();
         }
     }
     
@@ -170,13 +233,15 @@ public class GameCtr implements GameCtrInterface {
     @Override
     public void start() {
         while(true){
-            for(int x = 0;x < cars.length;x++){
-                this.isCarColidetWithFrog(x);
-                this.CarOutOfBorder(x);
-            }
-            if(this.frog.isDead()){
-                this.updateCarPositions();
-                this.isCarFinished();
+            if(this.isPlayTrue()){
+                for(int x = 0;x < cars.length;x++){
+                    this.isCarColidetWithFrog(x);
+                    this.CarOutOfBorder(x);
+                }
+                if(this.frog.isDead()){
+                    this.updateCarPositions();
+                    this.isFrogFinished();
+                }
             }
             try {
                 TimeUnit.MILLISECONDS.sleep(1000/this.updateSpeed);
