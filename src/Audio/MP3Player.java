@@ -17,6 +17,8 @@ import javax.sound.sampled.Clip;
 public class MP3Player {
     public static final String carCrashSound = "src/Audio/car-crash.wav";
     public static Boolean canPlayCrashSound = true;
+    public static final String HonkSound = "src/Audio/honk.wav";
+    public static Boolean[] canPlayHonk = {true,true,true};
     public static void playSound(String filename) {
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(filename).getAbsoluteFile());

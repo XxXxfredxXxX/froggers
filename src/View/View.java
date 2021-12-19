@@ -100,6 +100,7 @@ public class View extends javax.swing.JFrame implements ViewInterface{
         jToggleButton1.setText("jToggleButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(500, 700));
         setPreferredSize(new java.awt.Dimension(500, 600));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/frog.png"))); // NOI18N

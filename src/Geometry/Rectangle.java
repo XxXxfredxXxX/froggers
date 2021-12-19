@@ -13,7 +13,7 @@ public class Rectangle {
         this.bottomRight = bottomRight;
     }
     
-    public boolean isOverLapping(Rectangle other){
+    public int getIntSpacing(Rectangle other){
         int[] thisPosition = {
             this.topLeft[0] + (this.bottomRight[0] - this.topLeft[0])/2,
             this.topLeft[1] + (this.bottomRight[1] - this.topLeft[1])/2
@@ -27,10 +27,7 @@ public class Rectangle {
             otherPosition[1] - thisPosition[1]
         };
         int distance = (int) Math.sqrt(Math.pow(vectorSubstraction[0],2) + Math.pow(vectorSubstraction[1],2));
-        if(distance < 90){
-            return true;
-        }
-        return false;
+        return distance;
     }
     
 }
