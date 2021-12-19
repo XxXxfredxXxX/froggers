@@ -162,16 +162,23 @@ public void keyUp(){
         frogBottomRightCorner[0] = frogTopLeftCorner[0] + frogDimension[0];
         frogBottomRightCorner[1] = frogBottomRightCorner[1] + frogDimension[0];
         Rectangle second = new Rectangle(frogTopLeftCorner, frogBottomRightCorner);
-        if(first.isOverLapping(second)){
+        int spacing = first.getIntSpacing(second);
+        if(spacing < 90){
             this.cars[carId].colideFrog(this.frog);
             if(MP3Player.canPlayCrashSound){
                 MP3Player.playSound(MP3Player.carCrashSound);
                 MP3Player.canPlayCrashSound = false;
             }
             return true;
-        }else{
-            return false;
+        }else if(spacing < 120 && spacing > 90){
+            if(MP3Player.canPlayHonk[carId]){
+                MP3Player.playSound(MP3Player.HonkSound);
+                MP3Player.canPlayHonk[carId] = false;
+            }
+        }else if(spacing > 200){
+            MP3Player.canPlayHonk[carId] = true;
         }
+        return false;
     }
     
     private void CarOutOfBorder(int carIndex){
