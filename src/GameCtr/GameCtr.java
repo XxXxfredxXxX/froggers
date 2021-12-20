@@ -30,7 +30,9 @@ public class GameCtr implements GameCtrInterface {
     }
     
     public void togglePlay(){
-        this.play = !this.play;
+        if(this.frog.isDead()){
+            this.play = !this.play;
+        }
     }
     
     public Boolean isPlayTrue(){
@@ -75,12 +77,17 @@ public class GameCtr implements GameCtrInterface {
     }
     
     private void resetCarPositionIfNeeded(int carIndex) {
+        Car currentcar = this.cars[carIndex];
         int[][] currentCarPosition = this.map.getCarPositions();
-        if(currentCarPosition[carIndex][0] < -100){
-            currentCarPosition[carIndex][0] = 399;
+        
+        if(currentcar.getDirection() == Direction.LEFT && currentCarPosition[carIndex][0] < -100){
+            currentCarPosition[carIndex][0] = 499;
+            currentcar.setStepsize();
             this.map.setCarPosition(currentCarPosition);
-        }else if(currentCarPosition[carIndex][0] >= 400 + 100 - this.cars[carIndex].stepsize){
-            currentCarPosition[carIndex][0] = 1 + this.cars[carIndex].stepsize;
+        }
+        if(currentcar.getDirection() == Direction.RIGHT && currentCarPosition[carIndex][0] >= 500 - this.cars[carIndex].stepsize){
+            currentCarPosition[carIndex][0] = -100 + this.cars[carIndex].stepsize;
+            currentcar.setStepsize();
             this.map.setCarPosition(currentCarPosition);
         }
     }
@@ -120,7 +127,7 @@ public void keyUp(){
     }
     
     public void keyRight(){
-        int[] froglimit = {400,Integer.MAX_VALUE};
+        int[] froglimit = {390,Integer.MAX_VALUE};
         int[] currentPosition = this.map.getFrogPosition();
         
         if(this.frog.isDead() && currentPosition[0]<froglimit[0] && this.isPlayTrue()){
@@ -130,7 +137,7 @@ public void keyUp(){
     }
     
     public void keyDown(){
-        int[] froglimit = {Integer.MAX_VALUE,700};
+        int[] froglimit = {Integer.MAX_VALUE,600};
         int[] currentPosition = this.map.getFrogPosition();
         
         if(this.frog.isDead() && currentPosition[1]<froglimit[1] && this.isPlayTrue()){
@@ -206,12 +213,12 @@ public void keyUp(){
     }
     
     private void isFrogFinished(){
-        if(this.map.frogPosition[1] < 10){
-            this.map.frogPosition[1] = 450;
-            this.levelUp();
+        if(this.map.frogPosition[1] < 100){
+            this.map.frogPosition[1] = 565;
             this.setNewCarXPositions();
             this.updateSpeed += 5;
             this.setNewCarDirection();
+            this.levelUp();
         }
     }
     

@@ -21,9 +21,9 @@ public class main {
         Car car3 = new Car();
         Car[] cars = new Car[] {car1,car2,car3};
         Map map = new Map();
-        map.setFrogPosition(new int[]{200,450});
+        map.setFrogPosition(new int[]{200,565});
         Random rand = new Random();
-        map.setCarPosition(new int[][]{{rand.nextInt(200)+100,100},{rand.nextInt(200)+100,200},{rand.nextInt(200)+100,300}});
+        map.setCarPosition(new int[][]{{rand.nextInt(200)+100,175},{rand.nextInt(200)+100,300},{rand.nextInt(200)+100,425}});
         GameCtr game = new GameCtr();
         game.setFrog(frog);
         game.setCars(cars);
