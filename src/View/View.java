@@ -88,6 +88,7 @@ public class View extends javax.swing.JFrame implements ViewInterface{
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+
         jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -132,9 +133,7 @@ public class View extends javax.swing.JFrame implements ViewInterface{
             .addGroup(layout.createSequentialGroup()
                 .addGap(182, 182, 182)
                 .addComponent(car1))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(jLabel3))
+            .addComponent(jLabel3)
             .addGroup(layout.createSequentialGroup()
                 .addGap(47, 47, 47)
                 .addComponent(car3))
@@ -153,9 +152,7 @@ public class View extends javax.swing.JFrame implements ViewInterface{
                 .addComponent(jLabel1)
                 .addGap(35, 35, 35)
                 .addComponent(car1))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(jLabel3))
+            .addComponent(jLabel3)
             .addGroup(layout.createSequentialGroup()
                 .addGap(419, 419, 419)
                 .addComponent(car3))

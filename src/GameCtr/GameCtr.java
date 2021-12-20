@@ -30,7 +30,9 @@ public class GameCtr implements GameCtrInterface {
     }
     
     public void togglePlay(){
-        this.play = !this.play;
+        if(this.frog.isDead()){
+            this.play = !this.play;
+        }
     }
     
     public Boolean isPlayTrue(){
