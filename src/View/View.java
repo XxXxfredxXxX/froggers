@@ -96,7 +96,6 @@ public class View extends javax.swing.JFrame implements ViewInterface{
         car2 = new javax.swing.JLabel();
         car3 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(500, 700));
@@ -120,8 +119,7 @@ public class View extends javax.swing.JFrame implements ViewInterface{
         car2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/car.png"))); // NOI18N
 
         car3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/car.png"))); // NOI18N
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel2.setText("Level: 1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
