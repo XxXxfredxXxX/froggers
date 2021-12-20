@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 public class Car extends Look{
     private final int speed = 100;
     private int direction;
-    public final int stepsize = 2;
+    public int stepsize = 2;
 
     public Car(){
         Random rand = new Random();
@@ -47,6 +47,11 @@ public class Car extends Look{
         }
     }
 
+    public void setStepsize(){
+        Random rand = new Random();
+        this.stepsize = rand.nextInt(4)+1;
+}
+    
     public int getStepsize() {
         return this.stepsize;
     }
