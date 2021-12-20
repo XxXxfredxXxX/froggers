@@ -88,13 +88,13 @@ public class View extends javax.swing.JFrame implements ViewInterface{
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
         jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         car1 = new javax.swing.JLabel();
         car2 = new javax.swing.JLabel();
         car3 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
