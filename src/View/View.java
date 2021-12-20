@@ -88,13 +88,14 @@ public class View extends javax.swing.JFrame implements ViewInterface{
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+
         jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         car1 = new javax.swing.JLabel();
         car2 = new javax.swing.JLabel();
         car3 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -133,9 +134,7 @@ public class View extends javax.swing.JFrame implements ViewInterface{
             .addGroup(layout.createSequentialGroup()
                 .addGap(182, 182, 182)
                 .addComponent(car1))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(jLabel3))
+            .addComponent(jLabel3)
             .addGroup(layout.createSequentialGroup()
                 .addGap(47, 47, 47)
                 .addComponent(car3))
@@ -154,9 +153,7 @@ public class View extends javax.swing.JFrame implements ViewInterface{
                 .addComponent(jLabel1)
                 .addGap(35, 35, 35)
                 .addComponent(car1))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(jLabel3))
+            .addComponent(jLabel3)
             .addGroup(layout.createSequentialGroup()
                 .addGap(419, 419, 419)
                 .addComponent(car3))
@@ -282,6 +279,7 @@ public class View extends javax.swing.JFrame implements ViewInterface{
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 
