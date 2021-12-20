@@ -95,7 +95,6 @@ public class View extends javax.swing.JFrame implements ViewInterface{
         car1 = new javax.swing.JLabel();
         car2 = new javax.swing.JLabel();
         car3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
