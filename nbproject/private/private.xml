@@ -3,11 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Fridtjof/Documents/NetBeansProjects/froggers/src/Audio/MP3Player.java</file>
-            <file>file:/C:/Users/Fridtjof/Documents/NetBeansProjects/froggers/src/View/View.java</file>
-            <file>file:/C:/Users/Fridtjof/Documents/NetBeansProjects/froggers/src/main.java</file>
-            <file>file:/C:/Users/Fridtjof/Documents/NetBeansProjects/froggers/src/Geometry/Rectangle.java</file>
-            <file>file:/C:/Users/Fridtjof/Documents/NetBeansProjects/froggers/src/GameCtr/GameCtr.java</file>
+            <file>file:/C:/Users/jonas/OneDrive/Dokumente/NetBeansProjects/froggers/src/Map/Map.java</file>
+            <file>file:/C:/Users/jonas/OneDrive/Dokumente/NetBeansProjects/froggers/src/img/backgroundV2.png</file>
+            <file>file:/C:/Users/jonas/OneDrive/Dokumente/NetBeansProjects/froggers/src/View/View.java</file>
+            <file>file:/C:/Users/jonas/OneDrive/Dokumente/NetBeansProjects/froggers/src/img/background.png</file>
+            <file>file:/C:/Users/jonas/OneDrive/Dokumente/NetBeansProjects/froggers/src/GameObjects/Car.java</file>
+            <file>file:/C:/Users/jonas/OneDrive/Dokumente/NetBeansProjects/froggers/src/GameCtr/GameCtr.java</file>
+            <file>file:/C:/Users/jonas/OneDrive/Dokumente/NetBeansProjects/froggers/src/GameObjects/Frog.java</file>
+            <file>file:/C:/Users/jonas/OneDrive/Dokumente/NetBeansProjects/froggers/src/GameCtr/KeyListenerFrogMovement.java</file>
         </group>
     </open-files>
 </project-private>

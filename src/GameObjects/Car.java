@@ -49,7 +49,7 @@ public class Car extends Look{
 
     public void setStepsize(){
         Random rand = new Random();
-        this.stepsize = rand.nextInt(3)+1;
+        this.stepsize = rand.nextInt(4)+1;
 }
     
     public int getStepsize() {
