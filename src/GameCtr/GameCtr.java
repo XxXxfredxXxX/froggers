@@ -87,6 +87,7 @@ public class GameCtr implements GameCtrInterface {
         }
         if(currentcar.getDirection() == Direction.RIGHT && currentCarPosition[carIndex][0] >= 500 - this.cars[carIndex].stepsize){
             currentCarPosition[carIndex][0] = -100 + this.cars[carIndex].stepsize;
+            currentcar.setStepsize();
             this.map.setCarPosition(currentCarPosition);
         }
     }
