@@ -14,6 +14,16 @@ import java.util.Random;
 public class main {
 
     public static void main(String[] args) throws IOException {
+        while(true){
+            Start start = new Start();
+            start.start();
+        }
+    }
+    
+}
+
+class Start{
+    public void start() throws IOException{
         Frog frog = new Frog();
         frog.setPicturePath("src/img/frog.png");
         Car car1 = new Car();
@@ -35,7 +45,6 @@ public class main {
         view.setFrog(frog);
         view.start();
         game.start();
-        
+        view.dispose();
     }
-    
 }

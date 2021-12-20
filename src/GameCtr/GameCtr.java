@@ -24,9 +24,14 @@ public class GameCtr implements GameCtrInterface {
     private int updateSpeed = 30;
     private Map map;
     private Boolean play = true;
+    private Boolean restart = false;
 
     public GameCtr() {
         this.level = 1;
+    }
+    
+    public void restart(){
+        this.restart = true;
     }
     
     public void togglePlay(){
@@ -249,6 +254,9 @@ public void keyUp(){
                     this.updateCarPositions();
                     this.isFrogFinished();
                 }
+            }
+            if(this.restart){
+                break;
             }
             try {
                 TimeUnit.MILLISECONDS.sleep(1000/this.updateSpeed);
