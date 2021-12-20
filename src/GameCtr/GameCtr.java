@@ -75,12 +75,15 @@ public class GameCtr implements GameCtrInterface {
     }
     
     private void resetCarPositionIfNeeded(int carIndex) {
+        Car currentcar = this.cars[carIndex];
         int[][] currentCarPosition = this.map.getCarPositions();
-        if(currentCarPosition[carIndex][0] < -100){
-            currentCarPosition[carIndex][0] = 399;
+        
+        if(currentcar.getDirection() == Direction.LEFT && currentCarPosition[carIndex][0] < -100){
+            currentCarPosition[carIndex][0] = 499;
             this.map.setCarPosition(currentCarPosition);
-        }else if(currentCarPosition[carIndex][0] >= 400 + 100 - this.cars[carIndex].stepsize){
-            currentCarPosition[carIndex][0] = 1 + this.cars[carIndex].stepsize;
+        }
+        if(currentcar.getDirection() == Direction.RIGHT && currentCarPosition[carIndex][0] >= 500 - this.cars[carIndex].stepsize){
+            currentCarPosition[carIndex][0] = -100 + this.cars[carIndex].stepsize;
             this.map.setCarPosition(currentCarPosition);
         }
     }
@@ -120,7 +123,7 @@ public void keyUp(){
     }
     
     public void keyRight(){
-        int[] froglimit = {400,Integer.MAX_VALUE};
+        int[] froglimit = {390,Integer.MAX_VALUE};
         int[] currentPosition = this.map.getFrogPosition();
         
         if(this.frog.isDead() && currentPosition[0]<froglimit[0] && this.isPlayTrue()){
@@ -130,7 +133,7 @@ public void keyUp(){
     }
     
     public void keyDown(){
-        int[] froglimit = {Integer.MAX_VALUE,700};
+        int[] froglimit = {Integer.MAX_VALUE,600};
         int[] currentPosition = this.map.getFrogPosition();
         
         if(this.frog.isDead() && currentPosition[1]<froglimit[1] && this.isPlayTrue()){
