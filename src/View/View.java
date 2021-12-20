@@ -31,7 +31,7 @@ public class View extends javax.swing.JFrame implements ViewInterface{
   
     
     
-    private final int UPS = 60;
+    private final int UPS = 50;
     public String frogPicturePath;
 
     /**
@@ -99,6 +99,11 @@ public class View extends javax.swing.JFrame implements ViewInterface{
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        car4 = new javax.swing.JLabel();
+        car5 = new javax.swing.JLabel();
+        car6 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(500, 700));
@@ -216,6 +221,15 @@ public class View extends javax.swing.JFrame implements ViewInterface{
                     .addGap(0, 0, 0)))
         );
 
+        car5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/car.png"))); // NOI18N
+
+        car6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/car.png"))); // NOI18N
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel6.setText("Level: 1");
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/frog.png"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -290,7 +304,7 @@ public class View extends javax.swing.JFrame implements ViewInterface{
     @Override
     public void start() {        
         this.setVisible(true);
-        int delay = 20;
+        int delay = 1000/this.UPS;
         KeyListenerFrogMovement frogMovement = new KeyListenerFrogMovement();//Neues Keylistwn
         this.addKeyListener(frogMovement);
         this.frogMovement = frogMovement;
@@ -324,7 +338,7 @@ public class View extends javax.swing.JFrame implements ViewInterface{
                 jLabel1.setLocation(x, y);
                 if(!frog.isDead()){
                     jLabel1.setIcon(new ImageIcon("src/img/frog_dead.png"));
-                    jLabel5.setIcon(new ImageIcon("src/img/game_over.png"));
+                    jLabel5.setIcon(new ImageIcon("src/img/gameoverV2.png"));
                 }
                 if(!game.isPlayTrue()){
                     jLabel3.setIcon(new ImageIcon("src/img/pause.png"));
@@ -343,11 +357,16 @@ public class View extends javax.swing.JFrame implements ViewInterface{
     private javax.swing.JLabel car1;
     private javax.swing.JLabel car2;
     private javax.swing.JLabel car3;
+    private javax.swing.JLabel car4;
+    private javax.swing.JLabel car5;
+    private javax.swing.JLabel car6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
