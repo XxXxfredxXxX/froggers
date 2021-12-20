@@ -282,6 +282,7 @@ public class View extends javax.swing.JFrame implements ViewInterface{
                 }else{
                     jLabel3.setIcon(new ImageIcon(""));
                 }
+
            }
         };
         Timer timer = new Timer(delay, taskPerformer);//ein timer wird erstellt mit dem defenierten delay, objekt taskperformer, dann wird action performed ausgeführt
